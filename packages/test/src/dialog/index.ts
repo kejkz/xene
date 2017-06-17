@@ -84,8 +84,8 @@ export class Tester {
     if (expectation && error) expectation.reject(error)
   }
 
-  private sendMessage(text: string) {
-    this.testbot.onMessage({ id: '', text, user: this.dialogUser, chat: '' })
+  private sendMessage(value: string) {
+    this.testbot.onMessage({ id: '', value, type: 'string', user: this.dialogUser, chat: '' })
   }
 
   private bind(dialogClass: typeof Dialog) {

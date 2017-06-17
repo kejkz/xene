@@ -2,16 +2,20 @@ import Chat from './chat'
 import Dialog from './dialog'
 import Command from './command'
 
-import { UserMessage, BaseUser } from './types'
+import { BaseUserMessage, BaseUser } from './types'
 
-abstract class Bot<Message, User extends BaseUser> {
+abstract class Bot<
+  Message,
+  User extends BaseUser,
+  UserMessage extends BaseUserMessage<User> = BaseUserMessage<User>
+> {
   // This is a workaround to bind interfaces of User and Message
   // to Bot class so we can use them in other dependent classes
-  // with typesafty, but we don't need them in runtime
+  // with type safety, but we don't need them in runtime
   _: {
     User: User
     Message: Message
-    UserMessage: UserMessage<User>
+    UserMessage: UserMessage
   }
   private chats: Map<string, Chat<this>> = new Map()
   private dialogs: typeof Dialog[] = []
@@ -24,11 +28,11 @@ abstract class Bot<Message, User extends BaseUser> {
     if (commands) this.commands = commands
   }
 
-  onMessage(message: UserMessage<User>): void {
+  onMessage(message: UserMessage): void {
     const chat = this.getChat(message.chat)
-    const isCommand = this.isCommand(message.text)
+    const isCommand = message.type === 'string' && this.isCommand(message.value)
     if (!isCommand) return chat.processMessage(message)
-    const CommandClass = this.matchCommand(message.text)
+    const CommandClass = this.matchCommand(message.value)
     const command = new CommandClass(this, message.chat)
     command.user = message.user
     command.perform()

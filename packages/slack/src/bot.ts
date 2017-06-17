@@ -79,7 +79,8 @@ export default class Slackbot extends Bot<Message, IUser> {
     attachments = attachments.map(this.markActionSelected.bind(this, selected))
     this.onMessage({
       id: payload.ts,
-      text: selected.value,
+      value: selected.value,
+      type: 'string', // REFACTOR
       chat: payload.channel.id,
       user: await this.users.info(payload.user.id)
     })
@@ -119,7 +120,8 @@ export default class Slackbot extends Bot<Message, IUser> {
 
     this.onMessage({
       id: payload.ts,
-      text: payload.text,
+      value: payload.text,
+      type: 'string', // REFACTOR
       user: await this.users.info(payload.user),
       chat: payload.channel
     })

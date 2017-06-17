@@ -33,7 +33,7 @@ export default class Dialog<B extends Bot<any, { id: string }>> {
    */
   async talk(): Promise<void> { throw new Error('Method talk is not defined') }
 
-  onIncomingMessage(message: string): void | Promise<void> { /* implemented in a subclass */ }
+  onIncomingMessage(message: B['_']['UserMessage']): void | Promise<void> { /* implemented in a subclass */ }
   onOutgoingMessage(message: B['_']['Message']): void | Promise<void> { /* implemented in a subclass */ }
   onStart(): void | Promise<void> { /* implemented in a subclass */ }
   onAbort(error?: any): void | Promise<void> { /* implemented in a subclass */ }

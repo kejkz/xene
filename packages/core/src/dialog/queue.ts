@@ -1,4 +1,4 @@
-import Dialog from './index'
+import { BaseUserMessage, BaseUser } from '../types'
 
 export interface IAddSignature {
   parser: {
@@ -9,9 +9,9 @@ export interface IAddSignature {
   error?: (reply: string, parsed: any) => void // TODO better to return Promise<>
 }
 
-export default class Queue {
+export default class Queue<Message extends BaseUserMessage<BaseUser> = BaseUserMessage<BaseUser>> {
   private queue: IAddSignature[] = []
-  private message: string
+  private message: Message
 
   push(obj: IAddSignature) {
     this.queue.push(obj)
@@ -25,15 +25,15 @@ export default class Queue {
   async processMessage(msg = this.message) {
     this.message = msg
     if (!this.queue[0] || !msg) return
-    const {done, parser, error} = this.queue[0]
-    const parsed = await parser.parse(msg)
+    const { done, parser, error } = this.queue[0]
+    const parsed = await parser.parse(msg.value)
     const isValid = parser.check(parsed)
     if (isValid || !error) {
       done(parsed)
       this.queue.shift()
       this.processMessage(msg)
     } else {
-      error(msg, parsed)
+      error(msg.value, parsed)
     }
   }
 }

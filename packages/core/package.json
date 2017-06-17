@@ -16,5 +16,8 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "typescript": "^2.3.4"
+  }
 }

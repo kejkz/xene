@@ -6,10 +6,14 @@
   version "4.14.65"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.65.tgz#a0f78d71ffcd3c02628d5f616410c98c424326d5"
 
-"@xene/core@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@xene/core/-/core-0.0.6.tgz#da4b7c728d054765abb4a936222b487dd88880f5"
+"@xene/core@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@xene/core/-/core-0.0.10.tgz#a8409fce99f92220170e06008833a9b116e9d572"
 
 lodash@^4.17.4:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
+
+typescript@^2.3.4:
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.3.4.tgz#3d38321828231e434f287514959c37a82b629f42"

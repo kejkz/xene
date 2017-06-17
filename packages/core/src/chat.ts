@@ -10,7 +10,7 @@ export default class Chat<B extends Bot<any, BaseUser>> {
   processMessage(message: B['_']['UserMessage']) {
     const dialog = this.dialogs.get(message.user.id)
     if (!dialog) return this.startFromMessage(message)
-    this.forwardMessageToDialog(dialog, message.text)
+    this.forwardMessageToDialog(dialog, message)
   }
 
   startDialog(
@@ -31,16 +31,16 @@ export default class Chat<B extends Bot<any, BaseUser>> {
     this.dialogs.delete(userId)
   }
 
-  private startFromMessage({ user, text }: B['_']['UserMessage']) {
-    const DialogClass = this.bot.matchDialog(text)
+  private startFromMessage(message: B['_']['UserMessage']) {
+    const DialogClass = message.type === 'string' && this.bot.matchDialog(message.value)
     if (!DialogClass) return
-    const dialog = this.instantiateDialog(DialogClass, user)
+    const dialog = this.instantiateDialog(DialogClass, message.user)
     dialog.onStart()
-    this.forwardMessageToDialog(dialog, text)
+    this.forwardMessageToDialog(dialog, message)
     this.runDialog(dialog)
   }
 
-  private forwardMessageToDialog(dialog: Dialog<B>, message: string) {
+  private forwardMessageToDialog(dialog: Dialog<B>, message: B['_']['UserMessage']) {
     dialog.onIncomingMessage(message)
     dialog.queue.processMessage(message)
   }

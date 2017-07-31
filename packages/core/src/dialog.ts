@@ -14,8 +14,7 @@ const isFunction = (v): v is Function => typeof v === 'function'
 export class Dialog<
   Bot extends B,
   BotMessage extends Bot['_']['Message']= Bot['_']['Message'],
-  User extends Bot['_']['User']= Bot['_']['User']
-  > {
+  User extends Bot['_']['User']= Bot['_']['User']> {
 
   bot: Bot
   user: User

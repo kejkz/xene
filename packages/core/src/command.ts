@@ -3,8 +3,7 @@ import { Bot as B } from './bot'
 export class Command<
   Bot extends B,
   BotMessage extends Bot['_']['Message']= Bot['_']['Message'],
-  User extends Bot['_']['User']= Bot['_']['User']
-  > {
+  User extends Bot['_']['User']= Bot['_']['User']> {
 
   static match(message: string): boolean { return false }
   user: User

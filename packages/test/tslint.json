@@ -3,22 +3,61 @@
   "rules": {
     "curly": false,
     "member-access": false,
-    "ordered-imports": false,
+    "ordered-imports": [
+      false
+    ],
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "instance-field",
+          "static-field",
+          "constructor",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method"
+        ]
+      }
+    ],
     "unified-signatures": false,
-    "semicolon": [true, "never"],
+    "semicolon": [
+      true,
+      "never"
+    ],
+    "interface-name": [
+      false
+    ],
     "object-literal-sort-keys": false,
     "interface-over-type-literal": false,
     "adjacent-overload-signatures": true,
-    "quotemark": [true, "single", "avoid-escape"],
-    "arrow-parens": [false, "avoid-on-single-parameter"],
-    "space-before-function-paren": [true, { "asyncArrow": "always" }],
-    "trailing-comma": [true,
+    "quotemark": [
+      true,
+      "single",
+      "avoid-escape"
+    ],
+    "arrow-parens": [
+      true,
+      "ban-single-arg-parens"
+    ],
+    "space-before-function-paren": [
+      true,
+      {
+        "asyncArrow": "always"
+      }
+    ],
+    "trailing-comma": [
+      true,
       {
         "multiline": "never",
         "singleline": "never"
       }
     ],
-    "no-console": [false],
-    "array-type": [true, "array"]
+    "no-console": [
+      false
+    ],
+    "array-type": [
+      true,
+      "array"
+    ]
   }
 }

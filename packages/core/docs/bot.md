@@ -71,47 +71,4 @@ class TestDialog extends Dialog {
 const bot = new TermBot({ dialogs: [TestDialog] })
 ```
 
-## Reference
-
-### .constructor()
-<!--type-->
-```ts
-constructor(options) -> bot
-```
-
-**Arguments**
-
-| Argument | Type   | Description    |
-|:---------|:-------|:---------------|
-| options  | { dialogs: Dialog[], commands: Command[]} | options is an object with with `dialogs` and `commands` keys. Please note that `Bot` expects arrays of classes of `Dialogs` and `Commands`, not instances. |
-
-**Returns**
-
-| Type    | Description                                       |
-|:--------|:--------------------------------------------------|
-| Bot | instance of the Bot |
-<!--/type-->
-
-A simple example of usage is demonstrated below.
-
-```ts
-import { Bot, Dialog, Command } from '@xene/core'
-
-class OwnDialog extends Dialog { /* ... */ }
-class OwnCommand extends Command { /* ... */ }
-
-const bot = new Bot({ dialogs: [OwnDialog], commands: [OwnCommand] })
-```
-
-### .onMessage()
-<!--type-->
-```ts
-onMessage(message: UserMessage) -> void
-```
-
-**Arguments**
-
-| Argument | Type   | Description    |
-|:---------|:-------|:---------------|
-| message  | UserMessage | a user's message object |
-<!--/type-->
+<!-- api:core:bot -->

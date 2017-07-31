@@ -13,13 +13,6 @@ import { User, Message } from './types'
 import { Auth, RTM, Chat, Users, Groups, Channels } from './api'
 
 export class Slackbot extends Bot<string | Message, User> {
-  // Default dispatcher, used when user didn't provide
-  // custom dispatcher. This is moslty used when user has
-  // one type of bot, which is a common case
-  static dispatcher = new Dispatcher()
-  static middleware = middleware
-  static oauthAccess = Auth.access
-
   id: string
   bot: { id: string, name: string }
 
@@ -30,6 +23,17 @@ export class Slackbot extends Bot<string | Message, User> {
   users: Users
   groups: Groups
   channels: Channels
+
+  /**
+   * Default dispatcher, used when user didn't provide
+   * custom dispatcher. This is moslty used when user
+   * has one type of bot, which is a common case.
+   * @static
+   * @memberof Slackbot
+   */
+  static dispatcher = new Dispatcher()
+  static middleware = middleware
+  static oauthAccess = Auth.access
 
   constructor(options: {
     id?: string,

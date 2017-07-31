@@ -17,6 +17,11 @@ export class Dialog<
   User extends Bot['_']['User']= Bot['_']['User']
   > {
 
+  bot: Bot
+  user: User
+  chat: string
+  queue: Queue = new Queue()
+
   static isDefault = false
 
   /**
@@ -26,12 +31,9 @@ export class Dialog<
    * for your dialog, xene will use the default one, which always evaluates to
    * `false`.
    * @param  {string}  message a user message
-   * @return {boolean}         indicates if the `message` is a start of the Dialog
+   * @return {boolean} indicates if the `message` is a start of the Dialog
    */
   static match(message: string): boolean { return false }
-
-  user: User
-  queue: Queue = new Queue()
 
   /**
    * Very rarely you'll have to override constructor since both `bot` and
@@ -39,7 +41,9 @@ export class Dialog<
    * @param {Bot} bot instance of the xene bot to which a dialog belongs to
    * @param {string} chat a chat id
    */
-  constructor(public bot: Bot, public chat: string) {
+  constructor(bot: Bot, chat: string) {
+    this.bot = bot
+    this.chat = chat
     this.ask = this.ask.bind(this)
     this.parse = this.parse.bind(this)
     this.message = this.message.bind(this)
@@ -140,32 +144,30 @@ export class Dialog<
   /**
    * Queue parse for user messages
    */
-  parse<T>(parserFunc: ParseFunc<T>): Promise<T>
-  parse<T>(parserFunc: ParseFunc<T>, errorMessage: BotMessage): Promise<T>
-  parse<T>(parserFunc: ParseFunc<T>, errorCallback: ErrorFunc<T>): Promise<T>
-  parse<T>(parserObject: ParserObject<T>, errorMessage: BotMessage): Promise<T>
-  parse<T>(parserObject: ParserObject<T>, errorCallback: ErrorFunc<T>): Promise<T>
-  parse<T>(parser: Parser<T>, error?: BotMessage | ErrorFunc<T>): Promise<T> {
-    const onError = (!isNil(error) && !isFunction(error)) ? () => this.message(error) : error
+  parse<Parsed>(parser: Parser<Parsed>, onError?: BotMessage | ErrorFunc<Parsed>) {
+    const onErrorMessage = !isNil(onError) && !isFunction(onError)
     if (isFunction(parser)) parser = { parse: parser, check: parsed => !isNil(parsed) }
-    return new Promise((resolve, reject) => this.queue.push({
-      parser: parser as ParserObject<T>,
+    return new Promise<Parsed>((resolve, reject) => this.queue.push({
+      parser: parser as ParserObject<Parsed>,
       done: resolve as any,
-      error: onError
+      error: onErrorMessage ? () => this.message(onError as BotMessage) : onError
     }))
   }
 
-  ask<T>(message: BotMessage, parserFunc: ParseFunc<T>): Promise<T>
-  ask<T>(message: BotMessage, parserFunc: ParseFunc<T>, errorMessage: BotMessage): Promise<T>
-  ask<T>(message: BotMessage, parserFunc: ParseFunc<T>, errorCallback: ErrorFunc<T>): Promise<T>
-  ask<T>(message: BotMessage, parserObject: ParserObject<T>): Promise<T>
-  ask<T>(message: BotMessage, parserObject: ParserObject<T>, errorMessage: BotMessage): Promise<T>
-  ask<T>(message: BotMessage, parserObject: ParserObject<T>, errorCallback: ErrorFunc<T>): Promise<T>
-  async ask<T>(message: BotMessage, parser: Parser<T>, error?: BotMessage | ErrorFunc<T>): Promise<T> {
+  /**
+   * as
+   *
+   * @template Parsed
+   * @param {BotMessage} message
+   * @param {Parser<Parsed>} parser
+   * @param {(BotMessage | ErrorFunc<Parsed>)} [onError]
+   * @returns
+   */
+  async ask<Parsed>(message: BotMessage, parser: Parser<Parsed>, onError?: BotMessage | ErrorFunc<Parsed>) {
     await this.message(message)
     this.queue.resetMessage()
-    if (!error) error = () => this.message(message)
-    return this.parse<T>(parser as ParseFunc<T>, error)
+    if (!onError) onError = () => this.message(message)
+    return this.parse<Parsed>(parser as ParseFunc<Parsed>, onError)
   }
 
   startDialog(dialog: DialogFactory<Bot>, properties?: object) {

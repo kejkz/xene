@@ -7,9 +7,7 @@ category: reference
 
 # Bot
 
-<!--intro-->
-Write your own bot.
-<!--/intro-->
+<div class="intro">Write your own bot.</div>
 
 `Bot` class is a key part of xene, it manages user's messages, matches them with dialogs and defines constraints for third party bot authors. Its purpose is to wrap all xene related conversation logic in one place and provide simplest possible API to add support for new service, like [Slackbot](../../slack/docs/slackbot.md).
 

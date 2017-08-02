@@ -6,10 +6,6 @@ category: guide
 
 # Introduction
 
-<!--intro-->
-...to simple, modern bot framework.
-<!--/intro-->
-
 xene is a **modular**, **modern**, **simple** to use and **easy to extend** bot framework. It allows developers conversational bots that work with different messengers in the same way and in the same time doesn't limit any API of messengers.
 
 **Modular** xene provides two main packages `@xene/core` and `@xene/tester`. `@xene/core` provides core classes such as `Dialog` to describe conversations, `Command` to control the conversation with higher priority over `Dialog` and `Bot` that is consumed by other messenger specific packages to bind their APIs. `@xene/tester` is helper package that you can use to write highly efficient tests for your `Dialog`s and `Command`s;

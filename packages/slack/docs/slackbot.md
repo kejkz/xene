@@ -7,8 +7,4 @@ category: reference
 
 # Slackbot
 
-<!--intro-->
-Coming soon...
-<!--/intro-->
-
 <!-- api:slack:slackbot -->

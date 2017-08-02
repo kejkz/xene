@@ -6,9 +6,7 @@ category: reference
 
 # Dialog
 
-<!--intro-->
-React.Component for conversations.
-<!--/intro-->
+<div class="intro">React.Component for conversations.</div>
 
 The dialog is an abstract base class and core concept of xene. It allows you to define conversational flow with ES2017’s async/await and split complex conversational logic to small pieces. You will typically subclass it, and define `talk()` and static `match()` methods, like in the example below.
 

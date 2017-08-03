@@ -1,11 +1,9 @@
 ---
-id:       bot
-prev:     command
-category: reference
+id:   bot
+prev: command
+type: class
 
 ---
-
-# Bot
 
 <div class="intro">Write your own bot.</div>
 

@@ -1,11 +1,9 @@
 ---
-id:       command
-prev:     dialog
-category: reference
+id:   command
+prev: dialog
+type: class
 
 ---
-
-# Command
 
 <div class="intro">Key to control conversations.</div>
 

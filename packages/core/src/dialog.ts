@@ -110,26 +110,25 @@ export class Dialog<
    * users. The exact format of the message that will be sent to the users is
    * defined in each bot separately.
    *
-   *  Xene always formats message you pass to the `message()` function and
-   *  this is not related to the type of the `Message` defined in the bots
-   *  (`string`, `object`, `array`). It uses [lodash's string templates](
-   *  https://lodash.com/docs/#template) with default presets and imports
-   *  current dialog to the template. To better understand the concept, take a
-   *  look at the example bellow.
+   * Xene always formats message you pass to the `message()` function and
+   * this is not related to the type of the `Message` defined in the bots
+   * (`string`, `object`, `array`). It uses [string templates](https://lodash.com/docs/#template)
+   * from lodash with default presets and imports current dialog to the template.
+   * To better understand the concept, take a look at the example bellow.
    *
-   *  ```ts
-   *  class Greeting extends Dialog {
-   *    static isDefault = true
-   *    randomGreeting() {
-   *      return randomElement(['Good day', 'Hi', 'Hello'])
-   *    }
    *
-   *    async talk() {
-   *      await this.message('${randomGreeting()} ${user.name}.')
-   *    }
-   *  }
-   *  ```
-   * **NOTE: `Message` is a message type defined in bot class**
+   * ```ts
+   * class Greeting extends Dialog {
+   *   static isDefault = true
+   *   randomGreeting() {
+   *     return randomElement(['Good day', 'Hi', 'Hello'])
+   *   }
+   *
+   *   async talk() {
+   *     await this.message('${randomGreeting()} ${user.name}.')
+   *   }
+   * }
+   * ```
    *
    * @param {BotMessage} message a bot message
    * @returns result of `Bot#sendMessage()`

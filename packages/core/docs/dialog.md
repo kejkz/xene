@@ -1,10 +1,8 @@
 ---
-id:       dialog
-category: reference
+id:   dialog
+type: class
 
 ---
-
-# Dialog
 
 <div class="intro">React.Component for conversations.</div>
 
@@ -14,7 +12,7 @@ The dialog is an abstract base class and core concept of xene. It allows you to 
 import { Dialog } from '@xene/core'
 
 class Greeting extends Dialog {
-  static mathc(msg) { return msg }
+  static match(msg) { return msg }
   async talk() {
     await this.message('hi ${user.name}')
   }

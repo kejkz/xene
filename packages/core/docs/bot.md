@@ -1,7 +1,8 @@
 ---
-id:   bot
-prev: command
-type: class
+id:    bot
+title: Bot
+prev:  command
+type:  class
 
 ---
 

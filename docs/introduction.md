@@ -1,10 +1,7 @@
 ---
-id:       introduction
-category: guide
-
+id:    introduction
+title: Introduction
 ---
-
-# Introduction
 
 xene is a **modular**, **modern**, **simple** to use and **easy to extend** bot framework. It allows developers conversational bots that work with different messengers in the same way and in the same time doesn't limit any API of messengers.
 

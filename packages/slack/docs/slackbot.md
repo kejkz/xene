@@ -1,10 +1,8 @@
 ---
-id:       slackbot
-prev:     introduction
-category: reference
+id:    slackbot
+title: Slackbot
+prev:  overview
 
 ---
-
-# Slackbot
 
 <!-- api:slack:slackbot -->

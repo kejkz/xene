@@ -1,7 +1,8 @@
 ---
-id:   command
-prev: dialog
-type: class
+id:    command
+title: Command
+prev:  dialog
+type:  class
 
 ---
 

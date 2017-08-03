@@ -1,8 +1,7 @@
 ---
-id:       hello-world
-prev:     introduction
-category: guide
+id:    hello-world
+title: Hello World
+prev:  introduction
 
 ---
 
-# Hello world

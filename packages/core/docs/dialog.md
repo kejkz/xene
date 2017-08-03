@@ -1,6 +1,7 @@
 ---
-id:   dialog
-type: class
+id:    dialog
+title: Dialog
+type:  class
 
 ---
 

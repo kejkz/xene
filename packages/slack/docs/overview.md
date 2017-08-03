@@ -1,10 +1,8 @@
 ---
-id:       introduction
-category: guide
+id:    overview
+title: Overview
 
 ---
-
-# Introduction
 
 Slack module provides wrapper for Slack API and provides binding for [Bot](../../core/docs/bot.md) using Slack API so you can build your bot's much easier. Note that Slack module exports only [Slacbot](./slackbot.md) class which holds all methods to work with Slack.
 
